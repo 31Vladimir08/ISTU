@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>ecc561cb-986b-4094-bb76-f6022652c480</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>PythonApplication1.py</StartupFile>
+    <StartupFile>main.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,7 +21,22 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="PythonApplication1.py" />
+    <Compile Include="form.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="graphFunctions.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="intersectionPoint.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="pythonApplication1.py" />
+    <Compile Include="main.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="searchIntersectionPoint.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
