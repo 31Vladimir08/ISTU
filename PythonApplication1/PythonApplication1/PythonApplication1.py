@@ -1,8 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
-import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.pyplot as plt
 import math
 import re
 
