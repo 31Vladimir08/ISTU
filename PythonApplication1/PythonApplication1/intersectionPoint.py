@@ -7,11 +7,11 @@ class IntersectionPoint:
         return self.__coordinate_x
     @coordinate_x.setter
     def coordinate_x(self, value):
-        self.__coordinate_x = value
+        self.__coordinate_x = float(value)
 
     @property
     def coordinate_y(self):
         return self.__coordinate_y
     @coordinate_y.setter
     def coordinate_y(self, value):
-        self.__coordinate_y = value
+        self.__coordinate_y = float(value)

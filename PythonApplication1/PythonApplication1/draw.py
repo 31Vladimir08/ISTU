@@ -6,17 +6,23 @@ import math
 import re
 
 class Draw:
-    def create_draw(self, a, b, c, d, point_start, point_finish, y):
+    def __init__(self, a, b, c, d):
+        self.__a = float(a)
+        self.__b = float (b)
+        self.__c = float(c)
+        self.__d = float(d)
+
+    def create_draw(self, point_start, point_finish, y):
         plt.close()
+        draw_fun = graph.GraphFunctions(self.__a, self.__b, self.__c, self.__d)
          # график.       
         x = np.linspace(point_start, point_finish, 100)
         X0 = np.linspace(point_start, point_finish, 2)
-        draw = points.SearchIntersectionPoint()
         # y0...y - линии одного графика, для каждой линии свой набор точек.
         Y0 = y + X0 * 0
-        Y = graph.GraphFunctions().return_fun_x(a, b, c, d, x)
+        Y = draw_fun.return_fun_x(x)
 
-        list_intersection_points = draw.return_list_intersection_points(a, b, c, d, point_start, point_finish, y)
+        list_intersection_points = points.SearchIntersectionPoint(self.__a, self.__b, self.__c, self.__d).return_list_intersection_points(point_start, point_finish, y)
         
         # будет 1 график, на нем 2 линии:
         fig, ax = plt.subplots()
@@ -41,8 +47,8 @@ class Draw:
         ax.grid()
 
         # ставим точки на графике 
-        ax.scatter(point_start, graph.GraphFunctions().return_fun_x(a, b, c, d, point_start), color = 'black', s = 20, marker = 'o')
-        ax.scatter(point_finish, graph.GraphFunctions().return_fun_x(a, b, c, d, point_finish), color = 'black', s = 20, marker = 'o')
+        ax.scatter(point_start, draw_fun.return_fun_x(point_start), color = 'black', s = 20, marker = 'o')
+        ax.scatter(point_finish, draw_fun.return_fun_x(point_finish), color = 'black', s = 20, marker = 'o')
     
         if len(list_intersection_points) > 0:
            i = -1
@@ -51,10 +57,6 @@ class Draw:
            # Добавление аннотации          
            xy = (list_intersection_points[i].coordinate_x, list_intersection_points[i].coordinate_y)
            ax.annotate('(%.5s, %.5s)' % xy, xy = xy, textcoords = 'data')
-
-           # очищаем массивы
-           # self._listX.clear()
-           # self._listY.clear()         
 
         # показать рисунок
         plt.show()  
