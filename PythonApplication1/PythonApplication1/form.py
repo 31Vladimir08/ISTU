@@ -1,5 +1,5 @@
 import tkinter as tk
-import searchIntersectionPoint as sipoint
+import draw
 from tkinter import ttk
 from tkinter import messagebox
 
@@ -15,7 +15,7 @@ class Form:
             #float_startx = float(self.input_startx.get())
             #float_finishx = float(self.input_finishx.get())
             
-            list_intersection_points = sipoint.SearchIntersectionPoint().return_intersection_points(1.0, - 6.0, 0.3, 17.0, 5.0, 7.0, 0.0)
+            list_intersection_points = draw.Draw().create_draw(1.0, - 6.0, 0.3, 17.0, 5.0, 7.0, 0.0)
         except BaseException as ex:
             messagebox.showinfo("Error", ex.args)
     def create_window(self):
