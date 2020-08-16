@@ -51,7 +51,7 @@ class Form:
         draw.Draw().close_draw()
         self.__app.destroy()
     def create_window(self):
-        self.__app.title("Приложение находит точку пересечения графика функции типа ax^3 + bx^2 + cx + d = 0 с заданной прямой на участке с заданным интерваллом")
+        self.__app.title("Приложение находит точки пересечения графика функции типа ax^3 + bx^2 + cx + d = y")
         self.__app.geometry("700x100")
         
         label_a = ttk.Label(self.__app, text = 'Параметр а=')
@@ -93,7 +93,7 @@ class Form:
         self.input_finish_point = ttk.Entry(self.__app, width = 10)
         self.input_finish_point.grid(row = 2, column = 3)
 
-        label_y = ttk.Label(self.__app, text = 'Параметр Y0=')
+        label_y = ttk.Label(self.__app, text = 'Параметр y=')
         label_y.grid(row = 2, column = 4)
 
         self.input_y = ttk.Entry(self.__app, width = 10)
