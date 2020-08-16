@@ -1,15 +1,17 @@
 import tkinter as tk
+
 import draw
 import searchIntersectionPoint as points
 from tkinter import ttk
 from tkinter import messagebox
-import asyncio
+from tkinter import *
 import math
 import re
 
 class Form:
     def __init__(self):
         self.__app = tk.Tk()
+        self.is_sigma = BooleanVar()
         self.__list_intersection_points = []
     @property
     def intersection_points(self):
@@ -40,8 +42,8 @@ class Form:
                 temp = float_finish_point
                 float_finish_point = float_start_point
                 float_start_point = temp
-            
-            self.intersection_points = points.SearchIntersectionPoint(float_a, float_b, float_c, float_d).return_list_intersection_points(float_start_point, float_finish_point, float_y)
+            bool_is_sigma = self.is_sigma.get()
+            self.intersection_points = points.SearchIntersectionPoint(float_a, float_b, float_c, float_d, bool_is_sigma).return_list_intersection_points(float_start_point, float_finish_point, float_y)
             draw.Draw(float_a, float_b, float_c, float_d).create_draw(float_start_point, float_finish_point, float_y, self.intersection_points)
         except BaseException as ex:
             messagebox.showinfo("Error", ex.args)
@@ -51,6 +53,7 @@ class Form:
     def create_window(self):
         self.__app.title("Приложение находит точку пересечения графика функции типа ax^3 + bx^2 + cx + d = 0 с заданной прямой на участке с заданным интерваллом")
         self.__app.geometry("700x100")
+        
         label_a = ttk.Label(self.__app, text = 'Параметр а=')
         label_a.grid(row = 0, column = 0)
 
@@ -94,8 +97,14 @@ class Form:
         label_y.grid(row = 2, column = 4)
 
         self.input_y = ttk.Entry(self.__app, width = 10)
-        self.input_y.grid(row = 2, column = 5)    
-    
+        self.input_y.grid(row = 2, column = 5)
+                
+        radiobutton_n = ttk.Radiobutton(self.__app, text = 'n = 10', value = False, variable = self.is_sigma)
+        radiobutton_n.grid(row = 2, column = 6, sticky=W)
+
+        radiobutton_sigma = ttk.Radiobutton(self.__app, text = 'sigms = 0.000001', value = True, variable = self.is_sigma)
+        radiobutton_sigma.grid(row = 2, column = 7, sticky=W)
+       
         btn_search = ttk.Button(self.__app, text = 'Найти', width = 10, command = self.show_draw_command)
         btn_search.grid(row = 3, column = 6)
 
