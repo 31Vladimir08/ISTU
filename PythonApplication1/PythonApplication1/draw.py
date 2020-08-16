@@ -12,7 +12,7 @@ class Draw:
         self.__c = float(c)
         self.__d = float(d)
 
-    def create_draw(self, point_start, point_finish, y):
+    def create_draw(self, point_start, point_finish, y, list_intersection_points):
         plt.close()
         draw_fun = graph.GraphFunctions(self.__a, self.__b, self.__c, self.__d)
          # график.       
@@ -49,15 +49,14 @@ class Draw:
         # ставим точки на графике 
         ax.scatter(point_start, draw_fun.return_fun_x(point_start), color = 'black', s = 20, marker = 'o')
         ax.scatter(point_finish, draw_fun.return_fun_x(point_finish), color = 'black', s = 20, marker = 'o')
-    
-        if len(list_intersection_points) > 0:
-           i = -1
-           ax.scatter(list_intersection_points[i].coordinate_x, list_intersection_points[i].coordinate_y, color='red', s=20, marker='o')   
+        count = len(list_intersection_points)
+        if count > 0:
+           for i in range(count):
+               ax.scatter(list_intersection_points[i].coordinate_x, list_intersection_points[i].coordinate_y, color='red', s=20, marker='o')   
            
-           # Добавление аннотации          
-           xy = (list_intersection_points[i].coordinate_x, list_intersection_points[i].coordinate_y)
-           ax.annotate('(%.5s, %.5s)' % xy, xy = xy, textcoords = 'data')
+               # Добавление аннотации          
+               xy = (list_intersection_points[i].coordinate_x, list_intersection_points[i].coordinate_y)
+               ax.annotate('(%.5s, %.5s)' % xy, xy = xy, textcoords = 'data')
 
         # показать рисунок
-        plt.show()  
-    
+        plt.show()

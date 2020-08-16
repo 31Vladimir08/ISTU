@@ -1,21 +1,30 @@
 import tkinter as tk
 import draw
+import searchIntersectionPoint as points
 from tkinter import ttk
 from tkinter import messagebox
 
 class Form:
+    def __init__(self):
+        self.__list_intersection_points = []
+    @property
+    def intersection_points(self):
+        return self.__list_intersection_points
+    @intersection_points.setter
+    def intersection_points(self, value):
+        self.__list_intersection_points = value
      # метод в котором реализуется нажатие кнопки
     def execute(self):
         try:
-            #float_a = float(self.input_a.get())
-            #float_b = float(self.input_b.get())
-            #float_c = float(self.input_c.get())
-            #float_d = float(self.input_d.get())
-            #float_y = float(self.input_y.get())
-            #float_startx = float(self.input_startx.get())
-            #float_finishx = float(self.input_finishx.get())
-            
-            list_intersection_points = draw.Draw(1.0, - 6.0, 0.3, 17.0).create_draw(5.0, 7.0, 0.0)
+            float_a = float(self.input_a.get())
+            float_b = float(self.input_b.get())
+            float_c = float(self.input_c.get())
+            float_d = float(self.input_d.get())
+            float_y = float(self.input_y.get())
+            float_start_point = float(self.input_start_point.get())
+            float_finish_point = float(self.input_finish_point.get())
+            self.intersection_points = points.SearchIntersectionPoint(float_a, float_b, float_c, float_d).return_list_intersection_points(float_start_point, float_finish_point, float_y)
+            draw.Draw(float_a, float_b, float_c, float_d).create_draw(float_start_point, float_finish_point, float_y, self.intersection_points)
         except BaseException as ex:
             messagebox.showinfo("Error", ex.args)
     def create_window(self):
@@ -52,14 +61,14 @@ class Form:
         self.label_y = ttk.Label(app, text = 'От')
         self.label_y.grid(row = 2, column = 0)
 
-        self.input_startx = ttk.Entry(app, width = 10)
-        self.input_startx.grid(row = 2, column = 1)
+        self.input_start_point = ttk.Entry(app, width = 10)
+        self.input_start_point.grid(row = 2, column = 1)
 
         self.label_y = ttk.Label(app, text = 'До')
         self.label_y.grid(row = 2, column = 2)
 
-        self.input_finishx = ttk.Entry(app, width = 10)
-        self.input_finishx.grid(row = 2, column = 3)
+        self.input_finish_point = ttk.Entry(app, width = 10)
+        self.input_finish_point.grid(row = 2, column = 3)
 
         label_y = ttk.Label(app, text = 'Параметр Y0=')
         label_y.grid(row = 2, column = 4)

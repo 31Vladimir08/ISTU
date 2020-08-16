@@ -26,8 +26,11 @@ class SearchIntersectionPoint:
             return pointStart        
         elif (fb == y):   
             return pointFinish
+        else:
+            return None
         
     def return_list_intersection_points(self, point_start, point_finish, y):
+        list_section = []
         list_intersection_points = []
         list_extremum_x = gfun.GraphFunctions(self.__a, self.__b, self.__c, self.__d).find_extremum_fun_x()
         count = len(list_extremum_x) if (list_extremum_x is not None) else 0
@@ -35,31 +38,22 @@ class SearchIntersectionPoint:
             point_added = self.return_intersection_point(point_start, point_finish, y)
             if (point_added is not None):
                 list_intersection_points.append(point_added)
-        elif (count == 1):
-            if ((point_start < list_extremum_x[0] and point_finish < list_extremum_x[0]) or (point_start >= list_extremum_x[0] and point_finish > list_extremum_x[0])):
-                point_added = self.return_intersection_point(point_start, point_finish, y)
-                if (point_added is not None):
-                    list_intersection_points.append(point_added)
-            else:
-                point_added = self.return_intersection_point(point_start, list_extremum_x[0], y)
-                if (point_added is not None):
-                    list_intersection_points.append(point_added)
-                point_added = self.return_intersection_point(list_extremum_x[0], point_finish, y)
-                if (point_added is not None):
-                    list_intersection_points.append(point_added)
         else:
-            if ((point_start < list_extremum_x[0] and point_finish < list_extremum_x[0]) or (point_start >= list_extremum_x[len(list_extremum_x) - 1] and point_finish > list_extremum_x[len(list_extremum_x) - 1])):
-                point_added = self.return_intersection_point(point_start, point_finish, y)
+            list_section.append(point_start)
+            list_section.append(point_finish)
+            for item in list_extremum_x:
+                if (item > point_start and item < point_finish):
+                    list_section.append(item)
+            list_section.sort()
+            for index in range (len(list_section) - 1):
+                point_added = self.return_intersection_point(list_section[index], list_section[index + 1], y)
                 if (point_added is not None):
                     list_intersection_points.append(point_added)
-            else:
-                for item in list_extremum_x:
-                    pass
         return list_intersection_points
     def return_intersection_point(self, pointStart, pointFinish, y):
         intersection_point = point.IntersectionPoint()
         intersection_point.coordinate_x = self.find_intersection_point(pointStart, pointFinish, y)
         intersection_point.coordinate_y = gfun.GraphFunctions(self.__a, self.__b, self.__c, self.__d).return_fun_x(intersection_point.coordinate_x) if (intersection_point.coordinate_x is not None) else None
-        return intersection_point if (intersection_point.coordinate_y is not None) else None
+        return intersection_point if (intersection_point.coordinate_x is not None) else None
     
 
