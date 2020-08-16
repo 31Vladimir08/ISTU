@@ -33,7 +33,6 @@
     <Compile Include="intersectionPoint.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="pythonApplication1.py" />
     <Compile Include="main.py">
       <SubType>Code</SubType>
     </Compile>
